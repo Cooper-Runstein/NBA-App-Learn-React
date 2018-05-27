@@ -7,6 +7,9 @@ const Player = props =>
             <li>{props.player.name} </li>
             <li>{props.player.city} - {props.player.team} </li>
             <li> {props.player.position} </li>
+            <li>Points Per Game: {props.player.stats.ppg} </li>
+            <li>Assists Per Game: {props.player.stats.apg} </li>
+            <li>Rebounds Per Game: {props.player.stats.rpg} </li>
         </ul>
     </div>
     
