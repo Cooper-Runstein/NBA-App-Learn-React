@@ -4,6 +4,34 @@ import Input from './Inputs.js';
 import Results from './Results.js';
 
 class App extends Component {
+  state = {
+    players : [
+      {
+        name : 'Lillard',
+        team : 'Trail-Blazers',
+        city : 'Portland',
+        position : 'PG',
+        stats : {
+          season : '17-18',
+          ppg : 26.9,
+          apg : 6.6,
+          rpg : 4.5	
+        }
+      },
+      {
+        name : 'James',
+        team : 'Cavaliers',
+        city : 'Cleveland',
+        position : 'SF',
+        stats : {
+          season : '17-18',
+          ppg : 27.5,
+          apg : 9.1,
+          rpg : 8.6
+        }
+      },
+    ]
+  }
   render() {
     return (
       <div className="App">
@@ -12,7 +40,7 @@ class App extends Component {
         </header>
         <div className="Main-wrapper">
           <Input />
-          <Results search="Lilard"/>
+          <Results players = {this.state.players}/>
          </div>
       </div>
     );

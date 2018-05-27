@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-;
+import React from 'react';
+import PropTypes from 'prop-types';
+import Player from './player.js';
+
 const Results = props => 
-    <div className="Results">
-
+    <div>
+        {props.players.map((element, index)=>
+            <Player
+                key = {index}
+                player={element}/>
+        )}
     </div>
-
+    
 Results.propTypes = {
-    search : PropTypes.string.isRequired
+    players : PropTypes.array.isRequired
 }
 
 export default Results;
