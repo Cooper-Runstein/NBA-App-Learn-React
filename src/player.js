@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Player = props => 
-    <div>
+    <div className="Player-wrapper">
          <ul>
             <li>{props.player.name} </li>
             <li>{props.player.city} - {props.player.team} </li>
@@ -11,6 +11,7 @@ const Player = props =>
             <li>Assists Per Game: {props.player.stats.apg} </li>
             <li>Rebounds Per Game: {props.player.stats.rpg} </li>
         </ul>
+        <button> Remove Player </button>
     </div>
     
 

@@ -27,6 +27,19 @@
   to { transform: rotate(360deg); }
 }
 
+/* Player Section*/
+
 li {
   list-style: none;
+}
+
+.Player-wrapper{
+  background: rgb(182, 76, 34);
+  margin: auto;
+  width: 25vw;
+  padding: 15px;
+}
+
+.Player-wrapper ul{
+  
 }
