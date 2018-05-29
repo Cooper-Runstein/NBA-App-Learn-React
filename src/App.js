@@ -5,6 +5,7 @@ import Results from './Results.js';
 
 class App extends Component {
   state = {
+    pendingPlayer: "",
     players : [
       {
         name : 'Lillard',
@@ -32,14 +33,27 @@ class App extends Component {
       },
     ]
   }
+
+  updatePendingPlayer = (e)=>{
+    this.setState({
+      pendingPlayer: e.target.value
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to My React Site</h1>
+          <h1 className="App-title">NBA Stat Comparison App</h1>
         </header>
         <div className="Main-wrapper">
-          <Input />
+          <form>
+            <input
+              placeholder="Enter Player Name"
+              value={this.state.pendingPlayer}
+              onChange={this.updatePendingPlayer}/>
+            <button>Add Player</button>
+          </form>
           <Results players = {this.state.players}/>
          </div>
       </div>
