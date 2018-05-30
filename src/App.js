@@ -39,16 +39,12 @@ class App extends Component {
           <h1 className="App-title">NBA Stat Comparison App</h1>
         </header>
         <div className="Main-wrapper">
-          <form>
-            <input
-              placeholder="Enter Player Name"
-              value={this.state.pendingPlayer}
-              onChange={this.updatePendingPlayer}/>
-            <button
-              onClick={this.addPendingPlayer}
-              >Add Player</button>
-          </form>
-          <Results players = {this.state.players}/>
+          <Input 
+            updatePendingPlayer= {this.updatePendingPlayer}
+            addPendingPlayer= {this.addPendingPlayer}
+            pendingPlayer= {this.state.pendingPlayer}/>
+          <Results 
+            players = {this.state.players}/>
          </div>
       </div>
     );
