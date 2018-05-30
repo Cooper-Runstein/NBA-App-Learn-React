@@ -2,42 +2,34 @@ import React, { Component } from 'react';
 import './App.css';
 import Input from './Inputs.js';
 import Results from './Results.js';
+import request from './request.js'
 
 class App extends Component {
   state = {
     pendingPlayer: "",
     players : [
-      {
-        name : 'Lillard',
-        team : 'Trail-Blazers',
-        city : 'Portland',
-        position : 'PG',
-        stats : {
-          season : '17-18',
-          ppg : 26.9,
-          apg : 6.6,
-          rpg : 4.5	
-        }
-      },
-      {
-        name : 'James',
-        team : 'Cavaliers',
-        city : 'Cleveland',
-        position : 'SF',
-        stats : {
-          season : '17-18',
-          ppg : 27.5,
-          apg : 9.1,
-          rpg : 8.6
-        }
-      },
+      
     ]
   }
 
   updatePendingPlayer = (e)=>{
+    e.preventDefault();
     this.setState({
       pendingPlayer: e.target.value
     })
+  }
+
+  addPendingPlayer = (e)=> {
+    e.preventDefault();
+    request(this.state.pendingPlayer).then(
+      data => {
+        this.setState(
+          {
+            players: [data, ...this.state.players],
+            pendingPlayer : ""
+          }
+        )
+      } )
   }
 
   render() {
@@ -52,7 +44,9 @@ class App extends Component {
               placeholder="Enter Player Name"
               value={this.state.pendingPlayer}
               onChange={this.updatePendingPlayer}/>
-            <button>Add Player</button>
+            <button
+              onClick={this.addPendingPlayer}
+              >Add Player</button>
           </form>
           <Results players = {this.state.players}/>
          </div>
