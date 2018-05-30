@@ -17,6 +17,9 @@ const Player = props =>
     </div>
     
 
+
+yyyyyyy
+
 Player.propTypes = {
     player : PropTypes.object.isRequired,
     handleRemove : PropTypes.func.isRequired
