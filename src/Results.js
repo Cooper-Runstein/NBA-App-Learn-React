@@ -7,12 +7,15 @@ const Results = props =>
         {props.players.map((element, index)=>
             <Player
                 key = {index}
-                player={element}/>
+                player={element}
+                handleRemove= {()=> props.removePlayer(index)}
+                />
         )}
     </div>
     
 Results.propTypes = {
-    players : PropTypes.array.isRequired
+    players : PropTypes.array.isRequired,
+    removePlayer : PropTypes.func.isRequired
 }
 
 export default Results;

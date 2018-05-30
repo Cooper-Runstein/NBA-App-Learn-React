@@ -11,12 +11,15 @@ const Player = props =>
             <li>Assists Per Game: {props.player.stats.apg} </li>
             <li>Rebounds Per Game: {props.player.stats.rpg} </li>
         </ul>
-        <button> Remove Player </button>
+        <button
+            onClick={props.handleRemove}
+            > Remove Player </button>
     </div>
     
 
 Player.propTypes = {
-    player : PropTypes.object.isRequired
+    player : PropTypes.object.isRequired,
+    handleRemove : PropTypes.func.isRequired
 }
 
 export default Player;

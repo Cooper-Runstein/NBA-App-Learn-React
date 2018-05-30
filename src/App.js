@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Input from './Inputs.js';
+import Input from './Input.js';
 import Results from './Results.js';
 import request from './request.js'
 
@@ -32,6 +32,15 @@ class App extends Component {
       } )
   }
 
+  removePlayer = index =>{
+    this.setState({
+      players: [
+        ...this.state.players.slice(0, index),
+        ...this.state.players.slice(index + 1)
+      ]
+    })
+  };
+
   render() {
     return (
       <div className="App">
@@ -44,7 +53,8 @@ class App extends Component {
             addPendingPlayer= {this.addPendingPlayer}
             pendingPlayer= {this.state.pendingPlayer}/>
           <Results 
-            players = {this.state.players}/>
+            players = {this.state.players}
+            removePlayer = {this.removePlayer}/>
          </div>
       </div>
     );
