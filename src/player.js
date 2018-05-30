@@ -15,10 +15,6 @@ const Player = props =>
             onClick={props.handleRemove}
             > Remove Player </button>
     </div>
-    
-
-
-yyyyyyy
 
 Player.propTypes = {
     player : PropTypes.object.isRequired,

@@ -19,17 +19,27 @@ class App extends Component {
     })
   }
 
+  validateEntry = (name) => {
+      let punc = [",", "'", "`", "." ];
+      name = name.replace(" ", "-");
+      name = name.toLowerCase();
+      punc.map(x=> name.replace(x, ""))
+      if (name !== undefined && name.length > 0){
+      return name}return false;
+    }
+
   addPendingPlayer = (e)=> {
     e.preventDefault();
-    request(this.state.pendingPlayer).then(
+    let req = this.validateEntry(this.state.pendingPlayer);
+    if (!!req){
+    request(req).then(
       data => {
         this.setState(
-          {
-            players: [data, ...this.state.players],
-            pendingPlayer : ""
-          }
-        )
-      } )
+          { players: data.concat([...this.state.players]),
+            pendingPlayer : ""})
+      })}else{
+        console.log("X");
+      }
   }
 
   removePlayer = index =>{
@@ -38,8 +48,8 @@ class App extends Component {
         ...this.state.players.slice(0, index),
         ...this.state.players.slice(index + 1)
       ]
-    })
-  };
+    });
+  }
 
   render() {
     return (
