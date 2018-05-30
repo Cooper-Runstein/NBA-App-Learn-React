@@ -32,13 +32,13 @@ class App extends Component {
     e.preventDefault();
     let req = this.validateEntry(this.state.pendingPlayer);
     if (!!req){
-    request(req).then(
-      data => {
-        this.setState(
-          { players: data.concat([...this.state.players]),
-            pendingPlayer : ""})
-      })}else{
-        console.log("X");
+      request(req).then(
+        data => {
+          this.setState(
+            { players: data.concat([...this.state.players]),
+              pendingPlayer : ""})}).catch(()=> alert("That name did not get a response. Try only a last name if the problem presists"))
+      }else{
+        alert("Invalid Name Entry, Please Try Again");
       }
   }
 

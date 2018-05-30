@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Player = props => 
     <div className="Player-wrapper">
          <ul>
-            <li>{props.player.name} </li>
+            <li>{props.player.name} #{props.player.jersey}</li>
             <li>{props.player.city} - {props.player.team} </li>
             <li> {props.player.position} </li>
             <li>Points Per Game: {props.player.stats.ppg} </li>

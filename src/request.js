@@ -28,6 +28,7 @@ const getPlayerObject = data => {
                 name : `${fName} ${lName}`,
                 team : team,
                 city : city,
+                jersey : jersey,
                 position : position,
                 stats : {
                     season : '16-17',
@@ -51,9 +52,13 @@ const request = (player) => {
     return fetch(url, {method:'GET',
     headers: headers,
     })
-    .then(response => response.json())
-    .then(json => getPlayerObject(json))
+    .then(response =>
+       
+            response.json()
+        ).then(json => getPlayerObject(json))
 };
 
 export default request;
 
+// if (response.ok){}else{alert("NAH BRAH")}   
+// }
