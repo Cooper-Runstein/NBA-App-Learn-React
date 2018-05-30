@@ -33,7 +33,7 @@ const getPlayerObject = data => {
                 apg : apg,
                 rpg : rpg	
             }
-            }
+        }
     
     return playerObject;
 }
@@ -49,15 +49,6 @@ const request = (player) => {
     .then(response => response.json())
     .then(json => getPlayerObject(json))
 };
-
-// let obj = [];
-
-
-
-// request('lillard').then(data => {
-//     obj.push(data);
-//     return obj;
-// })
 
 export default request;
 
