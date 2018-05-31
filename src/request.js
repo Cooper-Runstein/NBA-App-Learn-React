@@ -23,7 +23,12 @@ const getPlayerObject = data => {
         let apg = rawPlayerStats.AstPerGame["#text"];
         let ppg = rawPlayerStats.PtsPerGame["#text"];
         let rpg = rawPlayerStats.RebPerGame["#text"];
-    
+        let assists = rawPlayerStats.Ast["#text"];
+        let points = rawPlayerStats.Pts["#text"];
+        let blocks = rawPlayerStats.Blk["#text"];
+        let rebounds = rawPlayerStats.Reb["#text"];
+        let threepct = rawPlayerStats.Fg3PtPct["#text"];
+
         let playerObject = {
                 name : `${fName} ${lName}`,
                 team : team,
@@ -34,12 +39,16 @@ const getPlayerObject = data => {
                     season : '16-17',
                     ppg : ppg,
                     apg : apg,
-                    rpg : rpg	
+                    rpg : rpg,
+                    assists : assists,
+                    points : points, 
+                    blocks : blocks,
+                    rebounds : rebounds,
+                    threepct : threepct	
                 }
             }
         playerObjects.push(playerObject);
         })
-        console.log(playerObjects);
         return playerObjects;
 }
 
@@ -52,10 +61,8 @@ const request = (player) => {
     return fetch(url, {method:'GET',
     headers: headers,
     })
-    .then(response =>
-       
-            response.json()
-        ).then(json => getPlayerObject(json))
+    .then(response => response.json()).
+    then(json => getPlayerObject(json))
 };
 
 export default request;

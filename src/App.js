@@ -46,7 +46,9 @@ class App extends Component {
               pendingPlayer : ""})
               this.updateLeaderBoard()
           }
-            ).catch(()=> alert("That name did not get a response. Try only a last name if the problem presists"))
+            ).catch(()=> alert(`That name did not get a response. 
+            Try only a last name if the problem presists.
+            Don't Enter Nicknames, i.e. use Stephen, not Steph Curry `))
       }else{
         alert("Invalid Name Entry, Please Try Again");
       }

@@ -14,6 +14,51 @@
   grid-gap: 5px;
   min-height: 100vh;
 }
+
+.Title{
+  font-family: 'SFSportsNight', sans-serif;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+button{
+  background: white;
+  color:black;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#911002;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #911002;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 /* Header */
 .App-header {
   font-family: SFSportsNight, sans-serif;
@@ -21,7 +66,14 @@
   color: white;
   grid-column-start: 1;
   grid-column-end: 3;
-  
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  padding: 0;
+  margin: 0;
 }
 
 .App-title {
@@ -49,6 +101,9 @@
   background-color: #1e2d47;
 }
 
+.Comparison ul li{
+  margin-bottom: 7px;
+}
 /* Player Section*/
 
 li {
