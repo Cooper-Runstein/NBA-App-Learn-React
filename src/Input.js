@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const Input = props => 
+
     <form className="Input-box">
         <input
         placeholder="Enter Player Name"
         value={props.pendingPlayer}
         onChange={props.updatePendingPlayer}/>
         <button
-            onClick={props.addPendingPlayer}
+            onClick= {props.addPendingPlayer}
             >Add Player
         </button>
     </form>

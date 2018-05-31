@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import Input from './Input.js';
 import Results from './Results.js';
-import request from './request.js'
+import request from './request.js';
+import Comparison from './Comparison.js'
 
 class App extends Component {
   state = {
     pendingPlayer: "",
     players : [
       
-    ]
+    ],
+    leaderBoard: {
+      ppg : ["No Player Selected", ""],
+      apg : ["No Player Selected", ""],
+      rpg : ["No Player Selected", ""]
+    }
   }
 
+  //Player Entry
   updatePendingPlayer = (e)=>{
     e.preventDefault();
     this.setState({
@@ -36,19 +43,52 @@ class App extends Component {
         data => {
           this.setState(
             { players: data.concat([...this.state.players]),
-              pendingPlayer : ""})}).catch(()=> alert("That name did not get a response. Try only a last name if the problem presists"))
+              pendingPlayer : ""})
+              this.updateLeaderBoard()
+          }
+            ).catch(()=> alert("That name did not get a response. Try only a last name if the problem presists"))
       }else{
         alert("Invalid Name Entry, Please Try Again");
       }
   }
-
+  
+  //Player Manipulation
   removePlayer = index =>{
     this.setState({
       players: [
         ...this.state.players.slice(0, index),
         ...this.state.players.slice(index + 1)
       ]
-    });
+    }, this.updateLeaderBoard)
+    
+  }
+
+  updateLeaderBoard = ()=>{
+    console.log(this.state.players.length)
+    let ppg = ['No Player Selected',  ""];
+    let apg = ['No Player Selected', ""];
+    let rpg = ['No Player Selected', ""];
+
+    this.state.players.map((e, i)=>{
+      if(parseFloat(e.stats.ppg) > ppg[1]){
+        ppg = [e.name, parseFloat(e.stats.ppg)]
+      }
+      if(parseFloat(e.stats.rpg) > rpg[1]){
+        rpg = [e.name, parseFloat(e.stats.rpg)]
+      }
+      if(parseFloat(e.stats.apg) > apg[1]){
+        apg = [e.name, parseFloat(e.stats.apg)]
+      }
+    })
+
+    this.setState({
+      leaderBoard: {
+        ppg: ppg,
+        apg : apg,
+        rpg : rpg
+
+      }
+    })
   }
 
   render() {
@@ -60,15 +100,17 @@ class App extends Component {
         <Input 
           updatePendingPlayer= {this.updatePendingPlayer}
           addPendingPlayer= {this.addPendingPlayer}
-          pendingPlayer= {this.state.pendingPlayer}/>
+          pendingPlayer= {this.state.pendingPlayer}
+          />
         <div className='Results-box'>
           <Results 
             players = {this.state.players}
-            removePlayer = {this.removePlayer}/>
+            removePlayer = {this.removePlayer}
+            updateLeaderBoard= {this.updateLeaderBoard}/>
         </div>
-        <div className="Comparison">
-          <p>Comparison</p>
-        </div>
+        <Comparison 
+          leaderBoard={this.state.leaderBoard}
+        />
       </div>
     );
   }
