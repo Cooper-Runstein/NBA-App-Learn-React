@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = props => 
-    <form>
+    <form className="Input-box">
         <input
         placeholder="Enter Player Name"
         value={props.pendingPlayer}

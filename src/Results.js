@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import Player from './player.js';
 
 const Results = props => 
-    <div>
+    <div className="Results-wrapper">
         {props.players.map((element, index)=>
             <Player
                 key = {index}
-                player={element}
+                player= {element}
                 handleRemove= {()=> props.removePlayer(index)}
                 />
         )}
-    </div>
+        </div>
     
+
 Results.propTypes = {
     players : PropTypes.array.isRequired,
     removePlayer : PropTypes.func.isRequired

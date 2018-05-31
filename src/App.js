@@ -57,15 +57,18 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">NBA Stat Comparison App</h1>
         </header>
-        <div className="Main-wrapper">
-          <Input 
-            updatePendingPlayer= {this.updatePendingPlayer}
-            addPendingPlayer= {this.addPendingPlayer}
-            pendingPlayer= {this.state.pendingPlayer}/>
+        <Input 
+          updatePendingPlayer= {this.updatePendingPlayer}
+          addPendingPlayer= {this.addPendingPlayer}
+          pendingPlayer= {this.state.pendingPlayer}/>
+        <div className='Results-box'>
           <Results 
             players = {this.state.players}
             removePlayer = {this.removePlayer}/>
-         </div>
+        </div>
+        <div className="Comparison">
+          <p>Comparison</p>
+        </div>
       </div>
     );
   }
