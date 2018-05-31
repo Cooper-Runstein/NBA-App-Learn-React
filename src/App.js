@@ -3,7 +3,8 @@ import './App.css';
 import Input from './Input.js';
 import Results from './Results.js';
 import request from './request.js';
-import Comparison from './Comparison.js'
+import Comparison from './Comparison.js';
+
 
 class App extends Component {
   state = {
@@ -15,7 +16,17 @@ class App extends Component {
       ppg : ["No Player Selected", ""],
       apg : ["No Player Selected", ""],
       rpg : ["No Player Selected", ""]
-    }
+    },
+    selectedStats : [
+      {name : 'APG', checked : true},
+      {name: 'PPG', checked: true},
+      {name: 'RPG', checked: true}, 
+      {name: 'Assists', checked: false},
+      {name: 'Points', checked: false}, 
+      {name: 'Blocks', checked: false},
+      {name: 'Rebounds', checked: false},
+      {name: '3pct', checked: false}
+    ]
   }
 
   //Player Entry
@@ -65,8 +76,8 @@ class App extends Component {
     
   }
 
+  //Stats
   updateLeaderBoard = ()=>{
-    console.log(this.state.players.length)
     let ppg = ['No Player Selected',  ""];
     let apg = ['No Player Selected', ""];
     let rpg = ['No Player Selected', ""];
@@ -93,6 +104,17 @@ class App extends Component {
     })
   }
 
+  updateSelectedStats = index => {
+    this.setState({
+      selectedStats: [
+        ...this.selectedStats,
+        this.selectedStats[index].checked = !this.selectedStats[index].checked
+      ]
+
+    })
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -103,6 +125,8 @@ class App extends Component {
           updatePendingPlayer= {this.updatePendingPlayer}
           addPendingPlayer= {this.addPendingPlayer}
           pendingPlayer= {this.state.pendingPlayer}
+          selectedStats= {this.state.selectedStats}
+          updateSelectedStats = {this.updateSelectedStats}
           />
         <div className='Results-box'>
           <Results 

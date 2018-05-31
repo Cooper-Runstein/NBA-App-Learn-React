@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Stat from './Stat.js';
 
 
 const Input = props => 
-
-    <form className="Input-box">
+    <div className="Input-box">
+    <form >
         <input
         placeholder="Enter Player Name"
         value={props.pendingPlayer}
@@ -14,11 +15,22 @@ const Input = props =>
             >Add Player
         </button>
     </form>
+    <div className='Selection'>
+        {props.selectedStats.map((stat, index) =>
+            <Stat 
+                    key={index}
+                    stat={stat}/>
+        )}
+   </div>
+   </div>
+
+
 
 Input.propTypes = {
     pendingPlayer: PropTypes.string.isRequired,
     updatePendingPlayer: PropTypes.func.isRequired,
-    addPendingPlayer: PropTypes.func.isRequired
+    addPendingPlayer: PropTypes.func.isRequired,
+    selectedStats : PropTypes.object.isRequired
 }
 
 

@@ -61,8 +61,8 @@ const request = (player) => {
     return fetch(url, {method:'GET',
     headers: headers,
     })
-    .then(response => response.json()).
-    then(json => getPlayerObject(json))
+    .then(response => response.json())
+    .then(json => getPlayerObject(json))
 };
 
 export default request;

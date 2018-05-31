@@ -82,11 +82,23 @@ h1{
 
 /*Input section */
 .Input-box{
-  padding: auto;
-  margin: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
   grid-column-start: 1;
   grid-column-end: 3;
-  
+}
+.Selection{
+ display: flex;
+ flex-direction: row;
+}
+.Selection div{
+  display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ font-size: .7em;
 }
 .Input-box button{
   /* position: relative;
