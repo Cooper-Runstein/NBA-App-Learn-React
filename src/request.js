@@ -66,6 +66,3 @@ const request = (player) => {
 };
 
 export default request;
-
-// if (response.ok){}else{alert("NAH BRAH")}   
-// }

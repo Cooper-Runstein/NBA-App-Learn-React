@@ -104,16 +104,19 @@ class App extends Component {
     })
   }
 
-  updateSelectedStats = index => {
+  toggleCheckedAt = targetIndex => 
     this.setState({
-      selectedStats: [
-        ...this.selectedStats,
-        this.selectedStats[index].checked = !this.selectedStats[index].checked
-      ]
-
-    })
-  }
-
+      selectedStats: this.state.selectedStats.map((stat, index) => {
+        if (index === targetIndex) {
+            return {
+                ...stat,
+                checked: !stat[checked]
+            };
+        }
+        return stat;
+      })
+     
+    });
 
   render() {
     return (
@@ -126,7 +129,7 @@ class App extends Component {
           addPendingPlayer= {this.addPendingPlayer}
           pendingPlayer= {this.state.pendingPlayer}
           selectedStats= {this.state.selectedStats}
-          updateSelectedStats = {this.updateSelectedStats}
+          toggleCheckedAt = {this.toggleCheckedAt}
           />
         <div className='Results-box'>
           <Results 

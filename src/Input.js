@@ -19,7 +19,9 @@ const Input = props =>
         {props.selectedStats.map((stat, index) =>
             <Stat 
                     key={index}
-                    stat={stat}/>
+                    checked={stat.checked}
+                    name={stat.name}
+                    handleToggleChecked={ ()=> props.toggleCheckedAt(index) }/>
         )}
    </div>
    </div>
@@ -30,7 +32,8 @@ Input.propTypes = {
     pendingPlayer: PropTypes.string.isRequired,
     updatePendingPlayer: PropTypes.func.isRequired,
     addPendingPlayer: PropTypes.func.isRequired,
-    selectedStats : PropTypes.object.isRequired
+    selectedStats : PropTypes.object.isRequired,
+    toggleCheckedAt : PropTypes.func.isRequired
 }
 
 
