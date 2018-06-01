@@ -9,14 +9,16 @@ const Results = props =>
                 key = {index}
                 player= {element}
                 handleRemove= {()=> props.removePlayer(index)}
-                />
+                selectedStats ={props.selectedStats}
+                addPlayerStats = {props.addPlayerStats}/>
         )}
         </div>
     
 
 Results.propTypes = {
     players : PropTypes.array.isRequired,
-    removePlayer : PropTypes.func.isRequired
+    removePlayer : PropTypes.func.isRequired,
+    selectedStats : PropTypes.array.isRequired
 }
 
 export default Results;

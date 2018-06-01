@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import PlayerStats from './PlayerStats.js'
 
 const Player = props => 
     <div className="Player-wrapper">
@@ -7,13 +8,15 @@ const Player = props =>
             <li className="Title">{props.player.name} #{props.player.jersey}</li>
             <li>{props.player.city} - {props.player.team} </li>
             <li> {props.player.position} </li>
-            <li>Points Per Game: {props.player.stats.ppg} </li>
-            <li>Assists Per Game: {props.player.stats.apg} </li>
-            <li>Rebounds Per Game: {props.player.stats.rpg} </li>
-            {/* <li>Points: {props.player.stats.rpg} </li>
-            <li>Three Point Percentage: {props.player.stats.rpg} </li>
-            <li>Rebounds Per Game: {props.player.stats.rpg} </li>
-            <li>Rebounds Per Game: {props.player.stats.rpg} </li> */}
+            {props.selectedStats.map((e)=>{
+                if(e.checked){
+                    return <li>{e.name} : {props.player.stats[e.name]} </li>
+                }
+                return null
+            }
+
+            )}
+          
         </ul>
         <button
             onClick={props.handleRemove}

@@ -32,7 +32,7 @@ Input.propTypes = {
     pendingPlayer: PropTypes.string.isRequired,
     updatePendingPlayer: PropTypes.func.isRequired,
     addPendingPlayer: PropTypes.func.isRequired,
-    selectedStats : PropTypes.object.isRequired,
+    selectedStats : PropTypes.array.isRequired,
     toggleCheckedAt : PropTypes.func.isRequired
 }
 

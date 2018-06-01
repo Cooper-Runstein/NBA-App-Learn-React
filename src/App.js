@@ -6,27 +6,30 @@ import request from './request.js';
 import Comparison from './Comparison.js';
 
 
-class App extends Component {
-  state = {
-    pendingPlayer: "",
-    players : [
-      
-    ],
-    leaderBoard: {
-      ppg : ["No Player Selected", ""],
-      apg : ["No Player Selected", ""],
-      rpg : ["No Player Selected", ""]
-    },
-    selectedStats : [
-      {name : 'APG', checked : true},
-      {name: 'PPG', checked: true},
-      {name: 'RPG', checked: true}, 
-      {name: 'Assists', checked: false},
-      {name: 'Points', checked: false}, 
-      {name: 'Blocks', checked: false},
-      {name: 'Rebounds', checked: false},
-      {name: '3pct', checked: false}
-    ]
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pendingPlayer: "",
+      players: [
+        
+      ],
+      leaderBoard: {
+        PPG: ["No Player Selected", ""],
+        APG: ["No Player Selected", ""],
+        RPG: ["No Player Selected", ""]
+      },
+      selectedStats : [
+        {name: 'APG', checked : true},
+        {name: 'PPG', checked: true},
+        {name: 'RPG', checked: true}, 
+        {name: 'Assists', checked: false},
+        {name: 'Points', checked: false}, 
+        {name: 'Blocks', checked: false},
+        {name: 'Rebounds', checked: false},
+        {name: 'ThreePct', checked: false}
+      ]
+    }
   }
 
   //Player Entry
@@ -64,6 +67,15 @@ class App extends Component {
         alert("Invalid Name Entry, Please Try Again");
       }
   }
+
+  addPlayerStats = ()=>{
+    let html = "";
+    this.state.selectedStats.map(stat=>{
+      if(!!stat.checked)
+        html += <li> stat.name </li>
+    })
+    return html
+  }
   
   //Player Manipulation
   removePlayer = index =>{
@@ -78,27 +90,27 @@ class App extends Component {
 
   //Stats
   updateLeaderBoard = ()=>{
-    let ppg = ['No Player Selected',  ""];
-    let apg = ['No Player Selected', ""];
-    let rpg = ['No Player Selected', ""];
+    let PPG = ['No Player Selected',  ""];
+    let APG = ['No Player Selected', ""];
+    let RPG = ['No Player Selected', ""];
 
     this.state.players.map((e, i)=>{
-      if(parseFloat(e.stats.ppg) > ppg[1]){
-        ppg = [e.name, parseFloat(e.stats.ppg)]
+      if(parseFloat(e.stats.PPG) > PPG[1]){
+        PPG = [e.name, parseFloat(e.stats.PPG)]
       }
-      if(parseFloat(e.stats.rpg) > rpg[1]){
-        rpg = [e.name, parseFloat(e.stats.rpg)]
+      if(parseFloat(e.stats.RPG) > RPG[1]){
+        RPG = [e.name, parseFloat(e.stats.RPG)]
       }
-      if(parseFloat(e.stats.apg) > apg[1]){
-        apg = [e.name, parseFloat(e.stats.apg)]
+      if(parseFloat(e.stats.APG) > APG[1]){
+        APG = [e.name, parseFloat(e.stats.APG)]
       }
     })
 
     this.setState({
       leaderBoard: {
-        ppg: ppg,
-        apg : apg,
-        rpg : rpg
+        PPG: PPG,
+        APG: APG,
+        RPG: RPG
 
       }
     })
@@ -110,7 +122,7 @@ class App extends Component {
         if (index === targetIndex) {
             return {
                 ...stat,
-                checked: !stat[checked]
+                ['checked']: !stat['checked']
             };
         }
         return stat;
@@ -135,7 +147,9 @@ class App extends Component {
           <Results 
             players = {this.state.players}
             removePlayer = {this.removePlayer}
-            updateLeaderBoard= {this.updateLeaderBoard}/>
+            updateLeaderBoard= {this.updateLeaderBoard}
+            selectedStats={this.state.selectedStats}
+            addPlayerStats ={this.addPlayerStats}/>
         </div>
         <Comparison 
           leaderBoard={this.state.leaderBoard}

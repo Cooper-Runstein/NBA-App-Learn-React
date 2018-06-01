@@ -5,9 +5,9 @@ const Comparison = props =>
     <div className="Comparison">
             <ul>
                 <li className="Title"> Leaders </li>
-                <li>Points: {props.leaderBoard.ppg[0]} -{props.leaderBoard.ppg[1]}</li>
-                <li>Assists: {props.leaderBoard.apg[0]} -{props.leaderBoard.apg[1]}</li>
-                <li>Rebounds: {props.leaderBoard.ppg[0]} -{props.leaderBoard.ppg[1]}</li>
+                <li>Points Per Game: {props.leaderBoard.PPG[0]} : {props.leaderBoard.PPG[1]}</li>
+                <li>Assists Per Game: {props.leaderBoard.APG[0]} : {props.leaderBoard.APG[1]}</li>
+                <li>Rebounds Per Game: {props.leaderBoard.RPG[0]} : {props.leaderBoard.RPG[1]}</li>
             </ul>
 
     </div>

@@ -30,21 +30,21 @@ const getPlayerObject = data => {
         let threepct = rawPlayerStats.Fg3PtPct["#text"];
 
         let playerObject = {
-                name : `${fName} ${lName}`,
-                team : team,
-                city : city,
-                jersey : jersey,
-                position : position,
-                stats : {
+                name: `${fName} ${lName}`,
+                team: team,
+                city: city,
+                jersey: jersey,
+                position: position,
+                stats: {
                     season : '16-17',
-                    ppg : ppg,
-                    apg : apg,
-                    rpg : rpg,
-                    assists : assists,
-                    points : points, 
-                    blocks : blocks,
-                    rebounds : rebounds,
-                    threepct : threepct	
+                    PPG: ppg,
+                    APG: apg,
+                    RPG : rpg,
+                    Assists : assists,
+                    Points : points, 
+                    Blocks : blocks,
+                    Rebounds : rebounds,
+                    ThreePct : threepct	
                 }
             }
         playerObjects.push(playerObject);
