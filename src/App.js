@@ -14,20 +14,16 @@ class App extends React.Component {
       players: [
         
       ],
-      leaderBoard: {
-        PPG: ["No Player Selected", ""],
-        APG: ["No Player Selected", ""],
-        RPG: ["No Player Selected", ""]
-      },
+
       selectedStats : [
-        {name: 'APG', checked : true},
-        {name: 'PPG', checked: true},
-        {name: 'RPG', checked: true}, 
-        {name: 'Assists', checked: false},
-        {name: 'Points', checked: false}, 
-        {name: 'Blocks', checked: false},
-        {name: 'Rebounds', checked: false},
-        {name: 'ThreePct', checked: false}
+        {name: 'APG', checked: true, leadPlayer: "", score: ""},
+        {name: 'PPG', checked: true, leadPlayer: "", score: ""},
+        {name: 'RPG', checked: true, leadPlayer: "", score: ""}, 
+        {name: 'Assists', checked: false, leadPlayer: "", score: ""},
+        {name: 'Points', checked: false, leadPlayer: "", score: ""}, 
+        {name: 'Blocks', checked: false, leadPlayer: "", score: ""},
+        {name: 'Rebounds', checked: false, leadPlayer: "", score: ""},
+        {name: 'ThreePct', checked: false,leadPlayer: "", score: ""}
       ]
     }
   }
@@ -52,7 +48,7 @@ class App extends React.Component {
   addPendingPlayer = (e)=> {
     e.preventDefault();
     let req = this.validateEntry(this.state.pendingPlayer);
-    if (!!req){
+    if (req){
       request(req).then(
         data => {
           this.setState(
@@ -68,15 +64,6 @@ class App extends React.Component {
       }
   }
 
-  addPlayerStats = ()=>{
-    let html = "";
-    this.state.selectedStats.map(stat=>{
-      if(!!stat.checked)
-        html += <li> stat.name </li>
-    })
-    return html
-  }
-  
   //Player Manipulation
   removePlayer = index =>{
     this.setState({
@@ -84,35 +71,25 @@ class App extends React.Component {
         ...this.state.players.slice(0, index),
         ...this.state.players.slice(index + 1)
       ]
-    }, this.updateLeaderBoard)
-    
+    })
+   this.updateLeaderBoard()
   }
 
   //Stats
   updateLeaderBoard = ()=>{
-    let PPG = ['No Player Selected',  ""];
-    let APG = ['No Player Selected', ""];
-    let RPG = ['No Player Selected', ""];
-
-    this.state.players.map((e, i)=>{
-      if(parseFloat(e.stats.PPG) > PPG[1]){
-        PPG = [e.name, parseFloat(e.stats.PPG)]
-      }
-      if(parseFloat(e.stats.RPG) > RPG[1]){
-        RPG = [e.name, parseFloat(e.stats.RPG)]
-      }
-      if(parseFloat(e.stats.APG) > APG[1]){
-        APG = [e.name, parseFloat(e.stats.APG)]
-      }
-    })
-
-    this.setState({
-      leaderBoard: {
-        PPG: PPG,
-        APG: APG,
-        RPG: RPG
-
-      }
+    this.state.selectedStats.map((stat, index)=>{
+      let curStat = stat.name; 
+      this.state.players.map((player)=>{
+        if ((parseFloat(player.stats[curStat]) > parseFloat(stat.score)) || stat.score === ""){
+          const updatedStats = this.state.selectedStats.slice(0)
+          updatedStats[index] = {
+            ...this.state.selectedStats[index],
+            leadPlayer: player.name,
+            score: player.stats[curStat]
+          }
+          this.setState({
+              selectedStats: updatedStats})
+        }})
     })
   }
 
@@ -137,22 +114,21 @@ class App extends React.Component {
           <h1 className="App-title">NBA Stat Comparison App</h1>
         </header>
         <Input 
-          updatePendingPlayer= {this.updatePendingPlayer}
-          addPendingPlayer= {this.addPendingPlayer}
-          pendingPlayer= {this.state.pendingPlayer}
-          selectedStats= {this.state.selectedStats}
+          updatePendingPlayer = {this.updatePendingPlayer}
+          addPendingPlayer = {this.addPendingPlayer}
+          pendingPlayer = {this.state.pendingPlayer}
+          selectedStats = {this.state.selectedStats}
           toggleCheckedAt = {this.toggleCheckedAt}
           />
         <div className='Results-box'>
           <Results 
             players = {this.state.players}
             removePlayer = {this.removePlayer}
-            updateLeaderBoard= {this.updateLeaderBoard}
-            selectedStats={this.state.selectedStats}
-            addPlayerStats ={this.addPlayerStats}/>
+            selectedStats = {this.state.selectedStats}
+            addPlayerStats = {this.addPlayerStats}/>
         </div>
         <Comparison 
-          leaderBoard={this.state.leaderBoard}
+          stats= {this.state.selectedStats}
         />
       </div>
     );

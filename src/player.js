@@ -10,7 +10,7 @@ const Player = props =>
             <li> {props.player.position} </li>
             {props.selectedStats.map((e)=>{
                 if(e.checked){
-                    return <li>{e.name} : {props.player.stats[e.name]} </li>
+                    return <li key={e.name}>{e.name} : {props.player.stats[e.name]} </li>
                 }
                 return null
             }

@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 const Comparison = props =>
     <div className="Comparison">
             <ul>
-                <li className="Title"> Leaders </li>
-                <li>Points Per Game: {props.leaderBoard.PPG[0]} : {props.leaderBoard.PPG[1]}</li>
-                <li>Assists Per Game: {props.leaderBoard.APG[0]} : {props.leaderBoard.APG[1]}</li>
-                <li>Rebounds Per Game: {props.leaderBoard.RPG[0]} : {props.leaderBoard.RPG[1]}</li>
+                <li className="Title"> Leaders </li> 
+                {props.stats.map((stat)=>{
+                    if(stat.checked && stat.leadPlayer !== "" && stat.score !== ""){
+                        return <li key={stat.name}>{stat.name}: {stat.leadPlayer}: {stat.score}</li>
+                    }
+                    return null
+                })}
             </ul>
-
     </div>
 
 Comparison.propTypes = {
