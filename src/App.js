@@ -51,10 +51,12 @@ class App extends React.Component {
     if (req){
       request(req).then(
         data => {
+          const players = data.concat([...this.state.players])
           this.setState(
-            { players: data.concat([...this.state.players]),
-              pendingPlayer : ""})
-              this.updateLeaderBoard()
+            { players: players,
+              pendingPlayer : ""
+            })
+              this.updateLeaderBoard(players)
           }
             ).catch(()=> alert(`That name did not get a response. 
             Try only a last name if the problem presists.
@@ -66,30 +68,43 @@ class App extends React.Component {
 
   //Player Manipulation
   removePlayer = index =>{
+    const players = [
+      ...this.state.players.slice(0, index),
+      ...this.state.players.slice(index + 1)
+    ]
     this.setState({
-      players: [
-        ...this.state.players.slice(0, index),
-        ...this.state.players.slice(index + 1)
-      ]
+      players: players
     })
-   this.updateLeaderBoard()
+   this.updateLeaderBoard(players)
   }
 
   //Stats
-  updateLeaderBoard = ()=>{
-    this.state.selectedStats.map((stat, index)=>{
-      let curStat = stat.name; 
-      this.state.players.map((player)=>{
-        if ((parseFloat(player.stats[curStat]) > parseFloat(stat.score)) || stat.score === ""){
-          const updatedStats = this.state.selectedStats.slice(0)
-          updatedStats[index] = {
-            ...this.state.selectedStats[index],
-            leadPlayer: player.name,
-            score: player.stats[curStat]
-          }
-          this.setState({
-              selectedStats: updatedStats})
-        }})
+  updateLeaderBoard = (players)=>{
+    const prevStats = this.state.selectedStats.slice(0);
+    prevStats.map((stat, index)=>{
+
+      let curStat = stat.name;
+      let lastLeader = "";
+      let lastScore = 0; 
+
+      players.map((player)=>{
+       
+        if (parseFloat(player.stats[curStat]) > parseFloat(lastScore)){
+          lastScore = player.stats[curStat];
+          lastLeader = player.name;
+        }
+      })
+      
+      
+      prevStats[index] = {
+        ...this.state.selectedStats[index],
+        leadPlayer: lastLeader,
+        score: lastScore
+      }
+      
+    })
+    this.setState({
+      selectedStats: prevStats
     })
   }
 
